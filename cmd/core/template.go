@@ -1,9 +1,9 @@
 package core
 
 import (
-	"console/helper"
-	"console/src/gorm"
-	"console/src/template"
+	"github.com/Yolo-zb/gin-console/helper"
+	"github.com/Yolo-zb/gin-console/src/gorm"
+	"github.com/Yolo-zb/gin-console/src/template"
 	"github.com/spf13/cobra"
 )
 

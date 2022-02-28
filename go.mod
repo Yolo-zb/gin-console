@@ -1,4 +1,4 @@
-module console
+module github.com/Yolo-zb/gin-console
 
 go 1.16
 

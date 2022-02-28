@@ -1,8 +1,8 @@
 package service
 
 import (
-	"console/common/dao"
-	"console/common/model"
+	"github.com/Yolo-zb/gin-console/common/dao"
+	"github.com/Yolo-zb/gin-console/common/model"
 )
 
 // 一般情况下service应该只包含并调用自己的data模型，需要其他服务的功能请service.Xxx调用服务而不是引入其他data模型

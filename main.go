@@ -1,8 +1,8 @@
 package main
 
 import (
-	"console/cmd/core"
-	"console/config/mysql"
+	"github.com/Yolo-zb/gin-console/cmd/core"
+	"github.com/Yolo-zb/gin-console/config/mysql"
 	"github.com/spf13/cobra"
 	"log"
 )

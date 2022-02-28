@@ -1,9 +1,9 @@
 package dao
 
 import (
-	localGorm "console/src/gorm"
+	localGorm "github.com/Yolo-zb/gin-console/src/gorm"
 	"github.com/jinzhu/gorm"
-	"console/common/model"
+	"github.com/Yolo-zb/gin-console/common/model"
 )
 
 type UserAuth struct {

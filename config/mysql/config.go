@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"console/bootstrap"
-	"console/src/gorm"
+	"github.com/Yolo-zb/gin-console/bootstrap"
+	"github.com/Yolo-zb/gin-console/src/gorm"
 	"github.com/spf13/viper"
 )
 

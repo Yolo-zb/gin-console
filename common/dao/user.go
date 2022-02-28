@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"console/common/model"
-	localGorm "console/src/gorm"
+	"github.com/Yolo-zb/gin-console/common/model"
+	localGorm "github.com/Yolo-zb/gin-console/src/gorm"
 	"github.com/jinzhu/gorm"
 )
 
