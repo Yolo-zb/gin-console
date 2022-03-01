@@ -7,4 +7,5 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/viper v1.10.0
+	golang.org/x/mod v0.5.1 // indirect
 )

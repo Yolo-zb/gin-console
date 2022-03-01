@@ -3,6 +3,7 @@ package template
 import (
 	"bytes"
 	"fmt"
+	"github.com/Yolo-zb/gin-console/helper"
 	"github.com/Yolo-zb/gin-console/src/gorm"
 	"html/template"
 	"io/ioutil"
@@ -34,9 +35,9 @@ var DaoTemplate = `
 package dao
 
 import (
-	localGorm "console/src/gorm"
+	localGorm "github.com/Yolo-zb/gin-console/src/gorm"
 	"github.com/jinzhu/gorm"
-	"console/common/model"
+	"{{ .Module }}/common/model"
 )
 
 type {{ .BigCamel }} struct {
@@ -60,8 +61,8 @@ var ServiceTemplate = `
 package service
 
 import (
-	"console/common/dao"
-	"console/common/model"
+	"{{ .Module }}/common/dao"
+	"{{ .Module }}/common/model"
 )
 
 type {{ .Camel }}Service struct {
@@ -115,6 +116,7 @@ var sqlTypeMap = map[string]string{
 }
 type Model struct {
 	TableName string // 表名
+	Module 	  string // 模块名称
 	Column	  []TableColumn
 	PathTemplate	map[string]string // 要创建的目录及文件名称
 	Camel	  string // 小驼峰命名
@@ -142,24 +144,33 @@ func (s *Model) Execute() {
 		s.Column[key].DataType = sqlTypeMap[value.DataType]
 	}
 	for pathName, templateString := range s.PathTemplate{
-		daoPathName := s.getPath(pathName)
-		s.createFile(daoPathName, templateString)
+		dirPathName, filePathName := s.getPath(pathName)
+		s.createFile(dirPathName, filePathName, templateString)
 	}
 	//fmt.Println(service.User.GetById(1))
 	//fmt.Println(service.User.GetById(2337204))
 	//gorm.Close("localhost")
 }
 
-func (s *Model) getPath(dir string) string {
+func (s *Model) getPath(dir string) (string, string) {
 	wd, _ := os.Getwd()
-	return path.Join(wd, "/common/" + dir + "/" + s.Camel + ".go")
+	return path.Join(wd, "/common/" + dir), path.Join(wd, "/common/" + dir + "/" + s.Camel + ".go")
 }
 
-func (s *Model) createFile(path string, templateString string) {
+func (s *Model) createFile(dirPathName string, filePathName string, templateString string) {
+	exist, _ := helper.PathExists(dirPathName)
+	if !exist {
+		err := os.Mkdir(dirPathName, os.ModePerm)
+		if err != nil {
+			fmt.Printf("mkdir failed![%v]\n", err)
+		} else {
+			fmt.Println("mkdir" + dirPathName + "success!")
+		}
+	}
 	buf := new(bytes.Buffer)
 	tmpl, _ := template.New("name").Parse(templateString)
 	tmpl.Execute(buf, s)
-	if err := ioutil.WriteFile(path, buf.Bytes(), 0644); err != nil {
+	if err := ioutil.WriteFile(filePathName, buf.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
 }

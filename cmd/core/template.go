@@ -14,6 +14,7 @@ var Cmd = &cobra.Command {
 		camel := helper.TranCamel(args[0])
 		model := template.Model{
 			TableName : args[0],
+			Module: helper.GetModuleName(),
 			Camel : helper.LowerFirst(camel[:1]) + camel[1:],
 			BigCamel : camel,
 			PathTemplate : map[string]string{
