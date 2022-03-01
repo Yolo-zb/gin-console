@@ -6,7 +6,6 @@ import (
 	"github.com/Yolo-zb/gin-console/helper"
 	"github.com/Yolo-zb/gin-console/src/gorm"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
