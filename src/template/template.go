@@ -6,6 +6,7 @@ import (
 	"github.com/Yolo-zb/gin-console/helper"
 	"github.com/Yolo-zb/gin-console/src/gorm"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -159,7 +160,7 @@ func (s *Model) getPath(dir string) (string, string) {
 func (s *Model) createFile(dirPathName string, filePathName string, templateString string) {
 	exist := helper.PathExists(dirPathName)
 	if !exist {
-		err := os.MkdirAll(dirPathName, 0644)
+		err := os.MkdirAll(dirPathName, 0777)
 		if err != nil {
 			fmt.Printf("mkdir failed![%v]\n", err)
 		} else {
@@ -169,14 +170,7 @@ func (s *Model) createFile(dirPathName string, filePathName string, templateStri
 	buf := new(bytes.Buffer)
 	tmpl, _ := template.New("name").Parse(templateString)
 	tmpl.Execute(buf, s)
-	file, err := os.Create(filePathName)
-	if err != nil {
-		fmt.Println("创建"+ filePathName +"失败")
-	}
-	defer func() {
-		file.Close()
-	}()
-	file.Write(buf.Bytes())
+	ioutil.WriteFile(filePathName, buf.Bytes(), 0777)
 }
 
 // 下划线写法转为驼峰写法
