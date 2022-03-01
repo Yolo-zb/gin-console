@@ -142,12 +142,12 @@ func (s *Model) Execute() {
 		s.Column[key].ColumnName = TranCamel(value.ColumnName)
 		s.Column[key].DataType = sqlTypeMap[value.DataType]
 	}
-	//for pathName, templateString := range s.PathTemplate{
-	//	daoPathName := s.getPath(pathName)
-	//	s.createFile(daoPathName, templateString)
-	//}
-	fmt.Println(service.User.GetById(1))
-	fmt.Println(service.User.GetById(2337204))
+	for pathName, templateString := range s.PathTemplate{
+		daoPathName := s.getPath(pathName)
+		s.createFile(daoPathName, templateString)
+	}
+	//fmt.Println(service.User.GetById(1))
+	//fmt.Println(service.User.GetById(2337204))
 	//gorm.Close("localhost")
 }
 
