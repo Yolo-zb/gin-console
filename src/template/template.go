@@ -158,7 +158,7 @@ func (s *Model) getPath(dir string) (string, string) {
 }
 
 func (s *Model) createFile(dirPathName string, filePathName string, templateString string) {
-	exist, _ := helper.PathExists(dirPathName)
+	exist := helper.PathExists(dirPathName)
 	if !exist {
 		err := os.Mkdir(dirPathName, os.ModePerm)
 		if err != nil {
