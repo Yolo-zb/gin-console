@@ -164,15 +164,20 @@ func (s *Model) createFile(dirPathName string, filePathName string, templateStri
 		if err != nil {
 			fmt.Printf("mkdir failed![%v]\n", err)
 		} else {
-			fmt.Println("mkdir" + dirPathName + "success!")
+			fmt.Println("mkdir" + dirPathName + " success!")
 		}
 	}
 	buf := new(bytes.Buffer)
 	tmpl, _ := template.New("name").Parse(templateString)
 	tmpl.Execute(buf, s)
-	if err := ioutil.WriteFile(filePathName, buf.Bytes(), 0644); err != nil {
-		log.Fatal(err)
+	file, err := os.Create(filePathName)
+	if err != nil {
+		fmt.Println("创建"+ filePathName +"失败")
 	}
+	defer func() {
+		file.Close()
+	}()
+	file.Write(buf.Bytes())
 }
 
 // 下划线写法转为驼峰写法
