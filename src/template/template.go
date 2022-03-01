@@ -2,9 +2,8 @@ package template
 
 import (
 	"bytes"
-	"github.com/Yolo-zb/gin-console/common/service"
-	"github.com/Yolo-zb/gin-console/src/gorm"
 	"fmt"
+	"github.com/Yolo-zb/gin-console/src/gorm"
 	"html/template"
 	"io/ioutil"
 	"log"
